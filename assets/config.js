@@ -11,25 +11,11 @@ self.APP_CONFIG = {
   // Ganti url dengan link afiliasi kamu (Shopee, Tokopedia, dll).
   products: [
     {
-      id: 'cangkul-mini',
-      title: 'Set Cangkul Mini 3-in-1',
-      desc: 'Gemburkan tanah pot biar akar gampang nyerap air.',
-      url: 'https://example.com/afiliasi/cangkul-mini',
+      id: 'peace-lily',
+      title: 'Peace Lily (Spathiphyllum)',
+      desc: 'Tanaman hias tahan teduh & gampang dirawat, cocok buat pemula.',
+      url: 'https://s.shopee.co.id/6VOzHjX2s0',
       cta: 'Cek Harga'
-    },
-    {
-      id: 'pupuk-cair',
-      title: 'Pupuk Cair Organik 500ml',
-      desc: 'Campur ke air siraman 2 minggu sekali, daun lebih hijau.',
-      url: 'https://example.com/afiliasi/pupuk-cair',
-      cta: 'Lihat Produk'
-    },
-    {
-      id: 'semprotan',
-      title: 'Botol Semprot Embun 1L',
-      desc: 'Pas buat tanaman yang suka lembap seperti pakis & monstera.',
-      url: 'https://example.com/afiliasi/semprotan',
-      cta: 'Beli Sekarang'
     }
   ]
 };
