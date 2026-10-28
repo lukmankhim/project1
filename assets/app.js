@@ -84,6 +84,7 @@
           link.dataset.product = prod.id;
         } else {
           promo.remove();
+          node.querySelector('.more').remove();
         }
         list.appendChild(node);
       });
@@ -111,8 +112,47 @@
       }
     } else if (e.target.closest('.p-link')) {
       trackAffiliate(e.target.closest('.p-link').dataset.product, 'kartu');
+    } else if (e.target.closest('.more')) {
+      openRekom();
     }
   });
+
+  // --- Semua rekomendasi ---
+
+  var rekomDialog = document.getElementById('rekom-dialog');
+  var rekomList = document.getElementById('rekom-list');
+
+  function openRekom() {
+    rekomList.textContent = '';
+    APP_CONFIG.products.forEach(function (prod) {
+      var item = document.createElement('div');
+      item.className = 'promo';
+      var info = document.createElement('div');
+      var title = document.createElement('strong');
+      title.textContent = prod.title;
+      var desc = document.createElement('p');
+      desc.textContent = prod.desc;
+      info.appendChild(title);
+      info.appendChild(desc);
+      var link = document.createElement('a');
+      link.className = 'p-link';
+      link.href = prod.url;
+      link.target = '_blank';
+      link.rel = 'sponsored noopener';
+      link.textContent = prod.cta || 'Lihat';
+      link.dataset.product = prod.id;
+      item.appendChild(info);
+      item.appendChild(link);
+      rekomList.appendChild(item);
+    });
+    rekomDialog.showModal();
+  }
+
+  rekomList.addEventListener('click', function (e) {
+    var link = e.target.closest('.p-link');
+    if (link) trackAffiliate(link.dataset.product, 'daftar');
+  });
+  document.getElementById('rekom-close').addEventListener('click', function () { rekomDialog.close(); });
 
   // Catat siram ke server untuk penghitung di landing page. ID perangkat acak, bukan data pribadi.
   function catatSiram(idTanaman) {

@@ -58,6 +58,14 @@
     </form>
   </dialog>
 
+  <dialog id="rekom-dialog">
+    <h2>Rekomendasi buat tanamanmu</h2>
+    <div id="rekom-list"></div>
+    <div class="row">
+      <button class="btn btn-ghost" type="button" id="rekom-close">Tutup</button>
+    </div>
+  </dialog>
+
   <template id="card-tpl">
     <article class="card">
       <div class="card-head">
@@ -79,10 +87,11 @@
         </div>
         <a class="p-link" target="_blank" rel="sponsored noopener"></a>
       </div>
+      <button class="link-btn more" type="button">Lihat rekomendasi lain ›</button>
     </article>
   </template>
 
-  <script src="assets/config.js?v=2"></script>
+  <script src="assets/config.js?v=3"></script>
   <script src="assets/kv.js"></script>
   <script src="assets/tracking.js"></script>
   <script src="assets/lead.js"></script>

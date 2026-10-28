@@ -55,11 +55,14 @@ self.APP_CONFIG = {
   ]
 };
 
-// Produk afiliasi untuk satu tanaman. Dipakai kartu dan notifikasi agar selalu sama.
-self.productFor = function (plant) {
+// Produk afiliasi untuk satu tanaman hari ini. Bergilir tiap tengah malam (jam HP), jadi semua
+// produk sempat tampil; kartu dan notifikasi di hari yang sama tetap menampilkan produk yang sama.
+self.productFor = function (plant, now) {
   var list = self.APP_CONFIG.products;
   if (!list.length) return null;
   var id = plant.id_tanaman, h = 0;
   for (var i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 9973;
-  return list[h % list.length];
+  var d = new Date(now || Date.now());
+  var hari = Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 86400000);
+  return list[(h + hari) % list.length];
 };

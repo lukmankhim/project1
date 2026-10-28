@@ -1,8 +1,8 @@
 // Service Worker: cache aset agar aplikasi terbuka instan/offline,
 // dan mengecek jadwal siram untuk memicu notifikasi lokal.
-importScripts('assets/config.js?v=2', 'assets/kv.js');
+importScripts('assets/config.js?v=3', 'assets/kv.js');
 
-var CACHE = 'ingat-siram-v11';
+var CACHE = 'ingat-siram-v12';
 var DAY = 24 * 60 * 60 * 1000;
 var ASSETS = [
   'app.html',
@@ -10,7 +10,7 @@ var ASSETS = [
   'pasang.html',
   'manifest.json',
   'assets/style.css',
-  'assets/config.js?v=2',
+  'assets/config.js?v=3',
   'assets/kv.js',
   'assets/tracking.js',
   'assets/app.js',
