@@ -18,13 +18,6 @@ self.APP_CONFIG = {
       cta: 'Cek Harga'
     },
     {
-      id: 'monstera-artificial',
-      title: 'Monstera Artificial Jumbo 80cm',
-      desc: 'Hiasan ruangan ala tanaman asli, buat sudut yang kurang cahaya.',
-      url: 'https://s.shopee.co.id/4Vduu7h6Dr',
-      cta: 'Lihat Produk'
-    },
-    {
       id: 'media-tanam',
       title: 'Media Tanam Organik Siap Pakai',
       desc: 'Tanah gembur & subur, tinggal tuang ke pot. Air siraman nggak menggenang.',
@@ -51,6 +44,13 @@ self.APP_CONFIG = {
       desc: 'Tanam 12 tanaman di satu tiang, hemat tempat buat lahan sempit.',
       url: 'https://s.shopee.co.id/60Sih4JcLF',
       cta: 'Lihat Produk'
+    },
+    {
+      id: 'kemuning-melati',
+      title: 'Bunga Kemuning Melati Super Wangi',
+      desc: 'Bunga putih kecil yang harum, wanginya kerasa sampai dalam rumah.',
+      url: 'https://s.shopee.co.id/60Sih7nLD4',
+      cta: 'Cek Harga'
     }
   ]
 };
