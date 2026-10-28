@@ -258,7 +258,7 @@
   }
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(function () {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(function () {
       registerPeriodicSync();
       return navigator.serviceWorker.ready;
     }).then(function () {
