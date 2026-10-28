@@ -16,6 +16,13 @@ self.APP_CONFIG = {
       desc: 'Tanaman hias tahan teduh & gampang dirawat, cocok buat pemula.',
       url: 'https://s.shopee.co.id/6VOzHjX2s0',
       cta: 'Cek Harga'
+    },
+    {
+      id: 'monstera-artificial',
+      title: 'Monstera Artificial Jumbo 80cm',
+      desc: 'Hiasan ruangan ala tanaman asli, buat sudut yang kurang cahaya.',
+      url: 'https://s.shopee.co.id/4Vduu7h6Dr',
+      cta: 'Lihat Produk'
     }
   ]
 };
