@@ -44,6 +44,13 @@ self.APP_CONFIG = {
       desc: 'Satu pohon 5 warna bunga, tahan panas & cocok buat teras.',
       url: 'https://s.shopee.co.id/2LZQKIC2eL',
       cta: 'Cek Harga'
+    },
+    {
+      id: 'pot-vertikultur',
+      title: 'Pot Vertikultur 50cm 12 Lubang',
+      desc: 'Tanam 12 tanaman di satu tiang, hemat tempat buat lahan sempit.',
+      url: 'https://s.shopee.co.id/60Sih4JcLF',
+      cta: 'Lihat Produk'
     }
   ]
 };
