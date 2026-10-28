@@ -37,6 +37,13 @@ self.APP_CONFIG = {
       desc: 'Lengkap dengan vas kaca & batu hias. Cukup ganti airnya seminggu sekali.',
       url: 'https://s.shopee.co.id/4qGlIqYXCB',
       cta: 'Lihat Produk'
+    },
+    {
+      id: 'bugenvil-5-warna',
+      title: 'Bugenvil 5 Warna Siap Berbunga',
+      desc: 'Satu pohon 5 warna bunga, tahan panas & cocok buat teras.',
+      url: 'https://s.shopee.co.id/2LZQKIC2eL',
+      cta: 'Cek Harga'
     }
   ]
 };
