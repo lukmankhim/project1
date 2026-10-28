@@ -30,6 +30,13 @@ self.APP_CONFIG = {
       desc: 'Tanah gembur & subur, tinggal tuang ke pot. Air siraman nggak menggenang.',
       url: 'https://s.shopee.co.id/BUvkDeS0Z',
       cta: 'Cek Harga'
+    },
+    {
+      id: 'paket-media-air',
+      title: 'Paket Tanaman Hias Media Air',
+      desc: 'Lengkap dengan vas kaca & batu hias. Cukup ganti airnya seminggu sekali.',
+      url: 'https://s.shopee.co.id/4qGlIqYXCB',
+      cta: 'Lihat Produk'
     }
   ]
 };
