@@ -68,6 +68,16 @@ input:focus { outline: 2px solid var(--green); border-color: transparent; }
 .benefits li::before { content: "✓"; position: absolute; left: 4px; color: var(--green); font-weight: 700; }
 .panel { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
 
+/* Pasang */
+.step { color: var(--green); font-weight: 700; font-size: .85rem; margin: 16px 0 0; text-transform: uppercase; letter-spacing: .04em; }
+.steps { padding-left: 20px; margin: 0 0 12px; }
+.steps li { margin-bottom: 8px; }
+.share { width: 18px; height: 18px; vertical-align: -3px; color: #007AFF; }
+.arrow-down { text-align: center; font-size: 2rem; color: var(--green); animation: nudge 1.2s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateY(6px); } }
+.skip { text-align: center; margin-top: 24px; font-size: .85rem; }
+.skip a { color: var(--muted); }
+
 /* App */
 .topbar {
   position: sticky; top: 0; z-index: 5; background: #fff;
@@ -104,6 +114,10 @@ input:focus { outline: 2px solid var(--green); border-color: transparent; }
 .bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 12px; }
 .bar span { display: block; height: 100%; background: var(--green); border-radius: 99px; }
 .card.due .bar span { background: var(--accent); }
+
+.actions { display: flex; gap: 8px; }
+.actions .water { flex: 2; }
+.actions .cal { flex: none; width: auto; white-space: nowrap; font-size: .9rem; }
 
 .promo {
   display: flex; gap: 12px; align-items: center; justify-content: space-between;

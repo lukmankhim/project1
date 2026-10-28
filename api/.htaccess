@@ -1,7 +1,7 @@
-# Hanya lead.php dan click.php yang boleh diakses dari luar
+# Hanya endpoint publik yang boleh diakses dari luar
 <FilesMatch "\.php$">
   Require all denied
 </FilesMatch>
-<FilesMatch "^(lead|click)\.php$">
+<FilesMatch "^(lead|click|push-key|push-sync|ics)\.php$">
   Require all granted
 </FilesMatch>

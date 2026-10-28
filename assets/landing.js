@@ -63,15 +63,16 @@
       .then(function (res) {
         return res.json().catch(function () { return {}; }).then(function (data) {
           if (!res.ok || !data.ok) throw new Error(data.error || 'Gagal menyimpan, coba lagi.');
+          return data;
         });
       })
-      .then(function () {
+      .then(function (data) {
         Track.standard('Lead', {}, eventId);
-        try {
-          localStorage.setItem('lead', JSON.stringify({ nama: nama, kontak: value, tipe: tipe }));
-        } catch (e) {}
-        // Beri waktu Pixel mengirim event sebelum pindah halaman.
-        setTimeout(function () { location.href = 'app.html?baru=1'; }, 400);
+        var lead = { id: data.lead_id || 0, nama: nama, kontak: value, tipe: tipe };
+        try { localStorage.setItem('lead', JSON.stringify(lead)); } catch (e) {}
+        // Beri waktu Pixel mengirim event sebelum pindah ke langkah pasang aplikasi.
+        // Data lead ikut di hash URL agar tidak hilang saat pindah dari browser Facebook/IG ke Chrome/Safari.
+        setTimeout(function () { location.href = 'pasang.html#l=' + LeadLink.encode(lead); }, 400);
       })
       .catch(function (e) {
         err.textContent = e.message || 'Koneksi bermasalah, coba lagi.';

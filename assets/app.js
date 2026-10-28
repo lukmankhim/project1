@@ -8,9 +8,13 @@
   var addForm = document.getElementById('add-form');
   var addErr = document.getElementById('add-err');
 
-  var lead = readJSON('lead', null);
-  if (!lead) { location.replace('index.html'); return; }
-  document.getElementById('sapaan').textContent = 'Hai, ' + lead.nama.split(' ')[0];
+  var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  // PWA di layar utama iPhone punya penyimpanan terpisah dari Safari, jadi lead bisa kosong
+  // di sana walau pengguna sudah daftar. Hanya pengunjung browser biasa yang diarahkan ke landing.
+  var lead = LeadLink.restore();
+  if (!lead && !standalone) { location.replace('index.html'); return; }
+  lead = lead || { id: 0, nama: '', kontak: '' };
+  if (lead.nama) document.getElementById('sapaan').textContent = 'Hai, ' + lead.nama.split(' ')[0];
 
   function readJSON(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch (e) { return fallback; }
@@ -23,6 +27,7 @@
   function save(plants) {
     localStorage.setItem(KEY, JSON.stringify(plants));
     kv.set(KEY, plants).then(askSwToCheck).catch(function () {});
+    syncPushSoon();
   }
 
   function uid() { return 't' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
@@ -62,6 +67,11 @@
         node.querySelector('.name').textContent = plant.nama_tanaman;
         node.querySelector('.status').textContent = st.text;
         node.querySelector('.bar span').style.width = st.pct + '%';
+        node.querySelector('.cal').href = 'api/ics.php?' + new URLSearchParams({
+          n: plant.nama_tanaman,
+          i: plant.interval_siram,
+          s: plant.timestamp_terakhir_siram + plant.interval_siram * DAY
+        });
 
         var prod = productFor(plant);
         var promo = node.querySelector('.promo');
@@ -162,8 +172,58 @@
       maybeAskNotif();
       registerPeriodicSync();
       askSwToCheck();
+      subscribePush();
     });
   });
+
+  // --- Web Push: jadwal disalin ke server agar notifikasi tetap terkirim saat app tertutup ---
+
+  function urlBase64ToUint8Array(b64) {
+    var pad = '='.repeat((4 - b64.length % 4) % 4);
+    var raw = atob((b64 + pad).replace(/-/g, '+').replace(/_/g, '/'));
+    var out = new Uint8Array(raw.length);
+    for (var i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+    return out;
+  }
+
+  function subscribePush() {
+    if (!('PushManager' in window) || !('Notification' in window) || Notification.permission !== 'granted') return;
+    navigator.serviceWorker.ready.then(function (reg) {
+      return reg.pushManager.getSubscription().then(function (existing) {
+        if (existing) return existing;
+        return fetch('api/push-key.php')
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (!d.ok) throw new Error('push off');
+            return reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlBase64ToUint8Array(d.publicKey) });
+          });
+      });
+    }).then(syncPush).catch(function () {});
+  }
+
+  function syncPush() {
+    if (!('PushManager' in window) || !navigator.serviceWorker) return Promise.resolve();
+    return navigator.serviceWorker.ready.then(function (reg) {
+      return reg.pushManager.getSubscription();
+    }).then(function (sub) {
+      if (!sub) return;
+      var plants = load().map(function (p) {
+        var prod = productFor(p);
+        return Object.assign({}, p, { tips: prod ? prod.title + ' – ' + prod.desc : '' });
+      });
+      return fetch('api/push-sync.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subscription: sub.toJSON(), plants: plants, lead_id: lead.id || 0 })
+      });
+    }).catch(function () {});
+  }
+
+  var syncTimer = null;
+  function syncPushSoon() {
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(syncPush, 800);
+  }
 
   function askSwToCheck() {
     if (navigator.serviceWorker && navigator.serviceWorker.controller) {
@@ -188,7 +248,10 @@
     }).then(function () {
       // Pastikan salinan IndexedDB selalu sama dengan localStorage.
       return kv.set(KEY, load());
-    }).then(askSwToCheck).catch(function () {});
+    }).then(function () {
+      askSwToCheck();
+      subscribePush();
+    }).catch(function () {});
     navigator.serviceWorker.addEventListener('controllerchange', askSwToCheck);
   }
 
@@ -197,7 +260,6 @@
   var installBox = document.getElementById('install-box');
   var installBtn = document.getElementById('install-btn');
   var deferred = null;
-  var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();

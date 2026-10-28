@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pasang Ingat Siram</title>
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Ingat Siram">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <p class="step">Langkah 2 dari 2</p>
+    <h1>Pasang aplikasinya biar pengingat bisa bunyi 🔔</h1>
+    <p class="muted">Tanpa dipasang ke layar utama, HP kamu tidak bisa menerima notifikasi siram.</p>
+
+    <!-- Browser bawaan Instagram/Facebook/TikTok: harus pindah dulu -->
+    <section class="panel hidden" data-mode="inapp-android">
+      <h2>Buka di Chrome dulu</h2>
+      <p>Browser bawaan aplikasi ini tidak bisa memasang aplikasi.</p>
+      <a class="btn" id="open-chrome" href="#">Buka di Chrome</a>
+    </section>
+
+    <section class="panel hidden" data-mode="inapp-ios">
+      <h2>Buka di Safari dulu</h2>
+      <ol class="steps">
+        <li>Ketuk tombol <b>⋯</b> di pojok kanan atas</li>
+        <li>Pilih <b>Buka di Browser Eksternal</b> / <b>Buka di Safari</b></li>
+      </ol>
+      <p class="muted">Tidak ada pilihannya? Salin link lalu tempel di Safari:</p>
+      <button class="btn btn-ghost copy-link" type="button">Salin Link</button>
+    </section>
+
+    <!-- iPhone di Safari -->
+    <section class="panel hidden" data-mode="ios">
+      <h2>Pasang di iPhone (3 detik)</h2>
+      <ol class="steps">
+        <li>Ketuk tombol <b>Bagikan</b>
+          <svg class="share" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          di bawah layar</li>
+        <li>Gulir lalu pilih <b>Tambahkan ke Layar Utama</b></li>
+        <li>Ketuk <b>Tambah</b>, lalu buka <b>Ingat Siram</b> dari layar utama</li>
+      </ol>
+      <p class="muted">Butuh iOS 16.4 atau lebih baru agar notifikasi bisa muncul.</p>
+      <div class="arrow-down" aria-hidden="true">⬇</div>
+    </section>
+
+    <!-- Android Chrome / desktop dengan prompt pasang -->
+    <section class="panel hidden" data-mode="prompt">
+      <h2>Satu ketukan saja</h2>
+      <button class="btn" id="install-btn" type="button">📲 Pasang Aplikasi</button>
+    </section>
+
+    <!-- Browser lain tanpa prompt -->
+    <section class="panel hidden" data-mode="manual">
+      <h2>Pasang dari menu browser</h2>
+      <ol class="steps">
+        <li>Ketuk menu <b>⋮</b> di pojok kanan atas</li>
+        <li>Pilih <b>Instal aplikasi</b> atau <b>Tambahkan ke layar utama</b></li>
+      </ol>
+    </section>
+
+    <section class="panel hidden" data-mode="installed">
+      <h2>Berhasil terpasang ✅</h2>
+      <p>Buka <b>Ingat Siram</b> dari layar utama HP kamu, lalu tambahkan tanaman pertamamu.</p>
+    </section>
+
+    <p class="skip"><a href="app.html" id="skip">Lewati, pakai di browser saja</a></p>
+  </main>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/lead.js"></script>
+  <script src="assets/pasang.js"></script>
+</body>
+</html>

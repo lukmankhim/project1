@@ -29,13 +29,14 @@ try {
         'INSERT INTO users (nama, whatsapp_email, source_campaign) VALUES (?, ?, ?)'
     );
     $stmt->execute([$nama, $contact['email'] ?? $contact['phone'], $campaign !== '' ? $campaign : null]);
+    $leadId = (int) db()->lastInsertId();
 } catch (PDOException $e) {
     error_log('Simpan lead gagal: ' . $e->getMessage());
     respond(500, ['ok' => false, 'error' => 'Gagal menyimpan, coba lagi sebentar.']);
 }
 
 // Balas pengguna dulu, kirim CAPI setelahnya agar halaman tidak menunggu Meta.
-echo json_encode(['ok' => true]);
+echo json_encode(['ok' => true, 'lead_id' => $leadId]);
 if (function_exists('fastcgi_finish_request')) {
     fastcgi_finish_request();
 }

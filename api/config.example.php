@@ -13,4 +13,12 @@ return [
         'test_event_code' => '',  // isi saat uji coba (tab Test Events), kosongkan saat live
         'graph_version'   => 'v21.0',
     ],
+
+    // Kunci VAPID untuk Web Push. Buat sekali dengan: php cron/generate-vapid.php
+    // Jangan diganti setelah live: semua langganan push lama akan berhenti bekerja.
+    'push' => [
+        'public_key'  => '',
+        'private_key' => '',
+        'subject'     => 'mailto:admin@example.com',
+    ],
 ];

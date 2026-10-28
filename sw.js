@@ -2,11 +2,12 @@
 // dan mengecek jadwal siram untuk memicu notifikasi lokal.
 importScripts('assets/config.js', 'assets/kv.js');
 
-var CACHE = 'ingat-siram-v1';
+var CACHE = 'ingat-siram-v2';
 var DAY = 24 * 60 * 60 * 1000;
 var ASSETS = [
   'app.html',
   'index.html',
+  'pasang.html',
   'manifest.json',
   'assets/style.css',
   'assets/config.js',
@@ -14,6 +15,8 @@ var ASSETS = [
   'assets/tracking.js',
   'assets/app.js',
   'assets/landing.js',
+  'assets/lead.js',
+  'assets/pasang.js',
   'icons/icon-192.png',
   'icons/icon-512.png'
 ];
@@ -82,6 +85,30 @@ function checkDue() {
 
 self.addEventListener('message', function (e) {
   if (e.data && e.data.type === 'cek') e.waitUntil(checkDue());
+});
+
+// Web Push dari server (cron/send-reminders.php). Satu-satunya cara notifikasi
+// sampai ke iPhone saat aplikasi tertutup.
+self.addEventListener('push', function (e) {
+  var d = {};
+  try { d = e.data ? e.data.json() : {}; } catch (err) {}
+
+  e.waitUntil(
+    kv.get('notified').then(function (n) {
+      // Tandai agar pengecekan lokal tidak memunculkan notifikasi ganda.
+      n = n || {};
+      if (d.id) n[d.id] = d.ts;
+      return kv.set('notified', n);
+    }).catch(function () {}).then(function () {
+      return self.registration.showNotification(d.title || 'Ingat Siram 🌱', {
+        body: d.body || 'Ada tanaman yang perlu disiram 💧',
+        tag: 'siram-' + (d.id || 'umum'),
+        icon: 'icons/icon-192.png',
+        badge: 'icons/icon-192.png',
+        data: { id: d.id || '' }
+      });
+    })
+  );
 });
 
 self.addEventListener('periodicsync', function (e) {
