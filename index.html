@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ingat Siram – Pengingat Siram Tanaman Gratis</title>
+  <meta name="description" content="Pengingat jadwal siram dan pupuk tanaman untuk pemula. Gratis, ringan, bisa dipasang di layar utama HP.">
+  <meta name="theme-color" content="#2E7D32">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="assets/style.css">
+  <script>
+    // Sudah pernah daftar di HP ini? Langsung ke dasbor.
+    try { if (localStorage.getItem('lead')) location.replace('app.html'); } catch (e) {}
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="emoji" aria-hidden="true">🌱</div>
+      <h1>Tanamanmu nggak bakal layu lagi gara-gara lupa disiram</h1>
+      <p class="muted">Pengingat siram &amp; pupuk otomatis di HP. Gratis, tanpa install dari Play Store.</p>
+      <ul class="benefits">
+        <li>Atur jadwal siram tiap tanaman (misal 3 hari sekali)</li>
+        <li>Notifikasi langsung di HP saat waktunya siram</li>
+        <li>Tips alat &amp; pupuk yang cocok buat pemula</li>
+      </ul>
+    </section>
+
+    <form id="lead-form" class="panel" novalidate>
+      <h2>Mulai gratis sekarang</h2>
+
+      <label for="nama">Nama</label>
+      <input id="nama" name="nama" type="text" autocomplete="given-name" maxlength="100" required>
+
+      <label>Kirim pengingat &amp; tips ke</label>
+      <div class="seg" role="radiogroup">
+        <label><input type="radio" name="tipe" value="wa" checked><span>WhatsApp</span></label>
+        <label><input type="radio" name="tipe" value="email"><span>Email</span></label>
+      </div>
+
+      <label for="kontak" id="kontak-label">Nomor WhatsApp</label>
+      <input id="kontak" name="kontak" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx" maxlength="191" required>
+
+      <!-- Honeypot anti-bot: manusia tidak melihat kolom ini -->
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <p class="err" id="err" role="alert"></p>
+      <button class="btn" type="submit" id="submit">Buat Jadwal Siram Saya</button>
+      <p class="muted" style="margin-top:12px">Data kamu aman dan hanya dipakai untuk pengingat &amp; tips perawatan.</p>
+    </form>
+  </main>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/tracking.js"></script>
+  <script src="assets/landing.js"></script>
+</body>
+</html>

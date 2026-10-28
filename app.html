@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ingat Siram</title>
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Ingat Siram">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <strong>🌱 Ingat Siram</strong>
+      <span class="muted" id="sapaan"></span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="notice hidden" id="install-box">
+      <p id="install-text">Pasang di layar utama biar pengingatnya jalan.</p>
+      <button class="btn btn-sm" id="install-btn" type="button">Pasang</button>
+    </div>
+
+    <div class="notice hidden" id="notif-box">
+      <p>Izinkan notifikasi supaya kamu diingatkan saat waktunya siram.</p>
+      <button class="btn btn-sm" id="notif-btn" type="button">Izinkan</button>
+    </div>
+
+    <div id="list"></div>
+
+    <div class="empty hidden" id="empty">
+      <div class="emoji" aria-hidden="true">🪴</div>
+      <p>Belum ada tanaman. Tambahkan tanaman pertamamu!</p>
+    </div>
+  </main>
+
+  <button class="btn fab" id="add-btn" type="button">+ Tambah Tanaman</button>
+
+  <dialog id="add-dialog">
+    <form id="add-form" method="dialog" novalidate>
+      <h2>Tambah Tanaman</h2>
+      <label for="nama_tanaman">Nama tanaman</label>
+      <input id="nama_tanaman" name="nama_tanaman" type="text" maxlength="60" placeholder="Monstera ruang tamu" required>
+
+      <label for="interval_siram">Siram setiap berapa hari?</label>
+      <input id="interval_siram" name="interval_siram" type="number" inputmode="numeric" min="1" max="60" value="3" required>
+
+      <p class="err" id="add-err" role="alert"></p>
+      <div class="row">
+        <button class="btn btn-ghost" type="button" id="cancel-btn">Batal</button>
+        <button class="btn" type="submit">Simpan</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="card-tpl">
+    <article class="card">
+      <div class="card-head">
+        <h2 class="name"></h2>
+        <button class="icon-btn del" type="button" aria-label="Hapus tanaman">✕</button>
+      </div>
+      <p class="status"></p>
+      <div class="bar"><span></span></div>
+      <button class="btn water" type="button">💧 Sudah Disiram</button>
+      <!-- Slot afiliasi: diisi dari APP_CONFIG.products -->
+      <div class="promo">
+        <div>
+          <small>Rekomendasi</small>
+          <strong class="p-title"></strong>
+          <p class="p-desc"></p>
+        </div>
+        <a class="p-link" target="_blank" rel="sponsored noopener"></a>
+      </div>
+    </article>
+  </template>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/kv.js"></script>
+  <script src="assets/tracking.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
