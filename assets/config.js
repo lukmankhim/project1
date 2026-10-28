@@ -23,6 +23,13 @@ self.APP_CONFIG = {
       desc: 'Hiasan ruangan ala tanaman asli, buat sudut yang kurang cahaya.',
       url: 'https://s.shopee.co.id/4Vduu7h6Dr',
       cta: 'Lihat Produk'
+    },
+    {
+      id: 'media-tanam',
+      title: 'Media Tanam Organik Siap Pakai',
+      desc: 'Tanah gembur & subur, tinggal tuang ke pot. Air siraman nggak menggenang.',
+      url: 'https://s.shopee.co.id/BUvkDeS0Z',
+      cta: 'Cek Harga'
     }
   ]
 };
