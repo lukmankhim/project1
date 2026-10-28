@@ -41,3 +41,14 @@ CREATE TABLE IF NOT EXISTS plant_schedules (
   CONSTRAINT fk_schedule_subscription FOREIGN KEY (subscription_id)
     REFERENCES push_subscriptions (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Satu baris setiap tombol "Sudah Disiram" ditekan. Dipakai untuk penghitung di landing page.
+CREATE TABLE IF NOT EXISTS siram_events (
+  id          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  device_hash CHAR(64)        NOT NULL,
+  id_tanaman  VARCHAR(40)     NOT NULL,
+  created_at  TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_device_tanaman (device_hash, id_tanaman, created_at),
+  KEY idx_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -3,6 +3,10 @@ self.APP_CONFIG = {
   // Isi dengan Pixel ID Meta kamu. Kosongkan untuk mematikan Pixel.
   pixelId: '',
 
+  // Penghitung siram di landing page baru tampil setelah jumlah pengguna mencapai angka ini,
+  // supaya tidak terlihat sepi di awal. Isi 0 untuk selalu tampil.
+  statsMinPengguna: 10,
+
   // Produk afiliasi yang disisipkan di kartu tanaman dan notifikasi.
   // Ganti url dengan link afiliasi kamu (Shopee, Tokopedia, dll).
   products: [

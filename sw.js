@@ -2,7 +2,7 @@
 // dan mengecek jadwal siram untuk memicu notifikasi lokal.
 importScripts('assets/config.js', 'assets/kv.js');
 
-var CACHE = 'ingat-siram-v2';
+var CACHE = 'ingat-siram-v3';
 var DAY = 24 * 60 * 60 * 1000;
 var ASSETS = [
   'app.html',
@@ -15,6 +15,7 @@ var ASSETS = [
   'assets/tracking.js',
   'assets/app.js',
   'assets/landing.js',
+  'assets/stats.js',
   'assets/lead.js',
   'assets/pasang.js',
   'icons/icon-192.png',

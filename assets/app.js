@@ -102,6 +102,7 @@
         return p;
       }));
       render();
+      catatSiram(id);
     } else if (e.target.closest('.del')) {
       var plant = load().filter(function (p) { return p.id_tanaman === id; })[0];
       if (plant && confirm('Hapus "' + plant.nama_tanaman + '"?')) {
@@ -112,6 +113,21 @@
       trackAffiliate(e.target.closest('.p-link').dataset.product, 'kartu');
     }
   });
+
+  // Catat siram ke server untuk penghitung di landing page. ID perangkat acak, bukan data pribadi.
+  function catatSiram(idTanaman) {
+    var device = localStorage.getItem('device_id');
+    if (!device) {
+      device = Array.prototype.map.call(crypto.getRandomValues(new Uint8Array(16)), function (b) {
+        return ('0' + b.toString(16)).slice(-2);
+      }).join('');
+      localStorage.setItem('device_id', device);
+    }
+    var body = JSON.stringify({ device: device, id_tanaman: idTanaman });
+    if (!(navigator.sendBeacon && navigator.sendBeacon('api/siram.php', new Blob([body], { type: 'application/json' })))) {
+      fetch('api/siram.php', { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'application/json' } }).catch(function () {});
+    }
+  }
 
   function trackAffiliate(productId, placement) {
     var eventId = Track.newEventId('aff');
